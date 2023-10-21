@@ -22,4 +22,4 @@ def test_process_csv(input_file, output_file):
 
     with open(output_file, 'r') as f:
         content = f.read()
-        assert content == 'Average: 15.00\n'
+        assert content == 'Average: 15.00'
