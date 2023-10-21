@@ -1,54 +1,24 @@
-"""
-Test goes here
+import os
+import pytest
+from main import process_csv
 
-"""
+@pytest.fixture
+def input_file(tmpdir):
+    file_path = os.path.join(tmpdir, 'test_input.csv')
+    with open(file_path, 'w', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(['header1', 'header2'])
+        csvwriter.writerow(['row1', '10'])
+        csvwriter.writerow(['row2', '20'])
+    return file_path
 
-import subprocess
+@pytest.fixture
+def output_file(tmpdir):
+    return os.path.join(tmpdir, 'output.txt')
 
+def test_process_csv(input_file, output_file):
+    process_csv(input_file, output_file)
 
-def test_decrypt():
-    """tests decrypt"""
-    result = subprocess.run(
-        ["python", "main.py", "decrypt", "Gb/Ve9PhJ665clfO5DMi3g=="],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-    result = subprocess.run(
-        [
-            "python",
-            "main.py",
-            "decrypt",
-            "Q9LCh9YvaLPGcXeEMQ8bSWz2nU0FMoqYmqBl0GxX6D1MXj76zHXboHyrDMZHeiR0H2MiDekXUV1FBeZYBUivc++YYzD78RhBMfpP6lq+IttySE0ns/P/xueKX4wY3ln8sBy/b1Zrm52Lun5KqmFhZvHj7d2pwHsz7DiuK37TkHg=",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_encrypt():
-    """tests encrypt"""
-    result = subprocess.run(
-        ["python", "main.py", "encrypt", "Hello World"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-    result = subprocess.run(
-        ["python", "main.py", "encrypt", "Mary had a little lamb a litte lamb"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-if __name__ == "__main__":
-    test_encrypt()
-    test_decrypt()
+    with open(output_file, 'r') as f:
+        content = f.read()
+        assert content == 'Average: 15.00\n'
