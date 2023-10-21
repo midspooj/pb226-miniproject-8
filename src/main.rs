@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use csv::ReaderBuilder;
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main_with_args(args: Vec<String>) -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 {
@@ -43,4 +43,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Average calculated and saved to {}", output_file);
 
     Ok(())
+}
+
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let args: Vec<String> = env::args().collect();
+    main_with_args(args)
 }
