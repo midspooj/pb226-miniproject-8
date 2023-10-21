@@ -1,4 +1,4 @@
-[![Python CI/CD Pipeline](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week8/actions/workflows/pythonCI.yml/badge.svg)](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week8/actions/workflows/pythonCI.yml)
+[![Python CI/CD Pipeline](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/pythonCI.yml/badge.svg)](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/pythonCI.yml)
 [![Rust CI/CD Pipeline](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week8/actions/workflows/rustCI.yml/badge.svg)](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week8/actions/workflows/rustCI.yml)
 # Jeremy Tan IDS706 Week 8 
 The project is a command-line interface (CLI) tool implemented in both Rust and Python for encrypting and decrypting messages using the AES-256 CBC PKCS#7 encryption algorithm. It supports two modes: encryption and decryption.
