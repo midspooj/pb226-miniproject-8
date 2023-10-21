@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let output_file = "output.txt";
 
     let file = File::open(input_file)?;
-    let mut rdr = ReaderBuilder::new().has_header(true).from_reader(file);
+    let mut rdr = ReaderBuilder::new().has_headers(true).from_reader(file);
 
     let mut total = 0;
     let mut count = 0;
