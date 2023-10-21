@@ -1,43 +1,26 @@
-"""libaray functions for encrpytion and decryption"""
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives import padding
+import csv
 
-# Define a global variable for the log file
-LOG_FILE = "python_times.md"
+def main():
+    total = 0
+    count = 0
 
+    with open('input.csv', 'r') as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip header
 
-def log_encrypt(message, encrypt, result, time):
-    """adds to a query markdown file"""
-    cipher = "encrypt" if encrypt else "decrypt"
+        for row in reader:
+            try:
+                value = int(row[1])
+                total += value
+                count += 1
+            except ValueError:
+                pass  # Ignore non-integer values
 
-    with open(LOG_FILE, "a") as file:
-        file.write(f"\nThe orginal message to the cipher is {message}\n\n\n")
-        file.write(f"The result of the {cipher} is {result}\n\n\n")
-        file.write(f"Elapsed time: {time} microseconds\n\n\n")
+    average = total / count if count > 0 else 0
 
+    with open('output.txt', 'w') as output:
+        output.write(f'Average: {average:.2f}')
 
-def encrypt_aes_256_cbc_pkcs(data, key, iv):
-    """encrypt data with key and iv"""
-    padder = padding.PKCS7(128).padder()
-    padded_data = padder.update(data) + padder.finalize()
+if __name__ == "__main__":
+    main()
 
-    backend = default_backend()
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
-    encryptor = cipher.encryptor()
-    ciphertext = encryptor.update(padded_data) + encryptor.finalize()
-
-    return ciphertext
-
-
-def decrypt_aes_256_cbc_pkcs(ciphertext, key, iv):
-    """decrypt data with key and iv"""
-    backend = default_backend()
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
-    decryptor = cipher.decryptor()
-    padded_data = decryptor.update(ciphertext) + decryptor.finalize()
-
-    unpadder = padding.PKCS7(128).unpadder()
-    data = unpadder.update(padded_data) + unpadder.finalize()
-
-    return data

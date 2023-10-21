@@ -1,29 +1,13 @@
+Python run time:
+real-time:  0m0.027s
+user-time:  0m0.018s
+system-time: 0m0.009s
 
-The orginal message to the cipher is Gb/Ve9PhJ665clfO5DMi3g==
+Rust run time:
+real-time: 0m0.004s
+user-time: 0m0.002s
+system-time: 0m0.001s
 
-
-The result of the decrypt is Hello World10
-
-
-Elapsed time: 123771.55800004402 microseconds
-
-
-The orginal message to the cipher is Hello World
-
-
-The result of the encrypt is QTrbyq87yaS8jwVFpr6stw==
-
-
-Elapsed time: 50571.37300002523 microseconds
-
-
-
-The orginal message to the cipher is Mary had a little lamb a litte lamb
-
-
-The result of the encrypt is QZFk+HFRJhsyMCCcHuXzUwvP21Nq6unpxGLVlblq9HNjeFclNfLwnJr0yZ1u3Ypd
-
-
-Elapsed time: 50666.37400000218 microseconds
+Rust is approximately 85.19% faster than Python for this specific task.
 
 
