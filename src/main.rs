@@ -1,14 +1,21 @@
-// Add dependencies in Cargo.toml:
-// [dependencies]
-// csv = "1.1.6"
-
+use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use csv::ReaderBuilder;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let file = File::open("input.csv")?;
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() != 2 {
+        println!("Usage: {} <input_file>", args[0]);
+        return Ok(());
+    }
+
+    let input_file = &args[1];
+    let output_file = "output.txt";
+
+    let file = File::open(input_file)?;
     let mut rdr = ReaderBuilder::new().has_header(true).from_reader(file);
 
     let mut total = 0;
@@ -30,9 +37,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         0.0
     };
 
-    let mut output = File::create("output.txt")?;
+    let mut output = File::create(output_file)?;
     write!(output, "Average: {:.2}", average)?;
+
+    println!("Average calculated and saved to {}", output_file);
 
     Ok(())
 }
-
