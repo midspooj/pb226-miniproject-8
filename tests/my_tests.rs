@@ -1,40 +1,28 @@
-#[cfg(test)]
-use assert_cmd::prelude::*;
-use std::process::Command;
-use tempdir::TempDir;
+use std::fs;
 
 #[test]
-fn test_encrypt_command() {
-    let temp_dir = TempDir::new("temp_dir").expect("Failed to create temporary directory");
-    let _temp_dir_path = temp_dir.path();
+fn test_cli_tool() {
+    // Create a temporary input file
+    let input_file = "test_input.csv";
+    let mut input_content = "header1,header2\n".to_string();
+    for i in 1..=10 {
+        input_content += &format!("row{},{}\n", i, i * 2);
+    }
+    fs::write(input_file, input_content).expect("Failed to create input file for testing.");
 
-    // First Command
-    let mut cmd = Command::cargo_bin("aes_cbc").unwrap();
-    cmd.args(&["--message", "Hello World", "--encrypt"]);
-    cmd.assert().success();
+    // Call the main function
+    let result = super::main_with_args(vec!["test", input_file.to_string()]);
 
-    // Second Command
-    let mut cmd = Command::cargo_bin("aes_cbc").unwrap();
-    cmd.args(&[
-        "--message",
-        "Mary had a little lamb a litte lamb",
-        "--encrypt",
-    ]);
-    cmd.assert().success();
-}
+    // Check if the output file was created
+    assert!(result.is_ok());
+    assert!(fs::metadata("output.txt").is_ok());
 
-#[test]
-fn test_decrypt_command() {
-    let temp_dir = TempDir::new("temp_dir").expect("Failed to create temporary directory");
-    let _temp_dir_path = temp_dir.path();
+    // Read and verify the content of the output file
+    let output_content =
+        fs::read_to_string("output.txt").expect("Failed to read output file for testing.");
+    assert_eq!(output_content.trim(), "Average: 6.00");
 
-    // First Command
-    let mut cmd = Command::cargo_bin("aes_cbc").unwrap();
-    cmd.args(&["--message", "QTrbyq87yaS8jwVFpr6stw=", "--decrypt"]);
-    cmd.assert().success();
-
-    // Second Command
-    let mut cmd = Command::cargo_bin("aes_cbc").unwrap();
-    cmd.args(&["--message", "Q9LCh9YvaLPGcXeEMQ8bSWz2nU0FMoqYmqBl0GxX6D1MXj76zHXboHyrDMZHeiR0H2MiDekXUV1FBeZYBUivc++YYzD78RhBMfpP6lq+IttySE0ns/P/xueKX4wY3ln8sBy/b1Zrm52Lun5KqmFhZvHj7d2pwHsz7DiuK37TkHg=", "--decrypt"]);
-    cmd.assert().success();
+    // Clean up: remove temporary files
+    fs::remove_file(input_file).expect("Failed to clean up temporary input file.");
+    fs::remove_file("output.txt").expect("Failed to clean up temporary output file.");
 }
