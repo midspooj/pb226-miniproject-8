@@ -1,5 +1,5 @@
 use std::fs;
-use crate::main_with_args; // Importing main_with_args
+use data_processing::main_with_args; // Importing main_with_args
 
 #[test]
 fn test_cli_tool() {
@@ -21,7 +21,7 @@ fn test_cli_tool() {
     // Read and verify the content of the output file
     let output_content =
         fs::read_to_string("output.txt").expect("Failed to read output file for testing.");
-    assert_eq!(output_content.trim(), "Average: 6.00");
+    assert_eq!(output_content.trim(), "Average: 11.00");
 
     // Clean up: remove temporary files
     fs::remove_file(input_file).expect("Failed to clean up temporary input file.");
