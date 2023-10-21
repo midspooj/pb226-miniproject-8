@@ -1,5 +1,5 @@
-use std::fs;
-use data_processing::main_with_args; // Importing main_with_args
+use data_processing::main_with_args;
+use std::fs; // Importing main_with_args
 
 #[test]
 fn test_cli_tool() {
@@ -27,4 +27,3 @@ fn test_cli_tool() {
     fs::remove_file(input_file).expect("Failed to clean up temporary input file.");
     fs::remove_file("output.txt").expect("Failed to clean up temporary output file.");
 }
-

@@ -1,8 +1,8 @@
+use csv::ReaderBuilder;
 use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
-use csv::ReaderBuilder;
 
 pub fn main_with_args(_args: Vec<String>) -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
@@ -44,7 +44,6 @@ pub fn main_with_args(_args: Vec<String>) -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-
 
 pub fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
