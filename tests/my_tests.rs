@@ -1,9 +1,7 @@
 use std::fs;
+use crate::main_with_args; // Importing main_with_args
 
 #[test]
-
-use src/main.rs::main;
-
 fn test_cli_tool() {
     // Create a temporary input file
     let input_file = "test_input.csv";
@@ -13,8 +11,8 @@ fn test_cli_tool() {
     }
     fs::write(input_file, input_content).expect("Failed to create input file for testing.");
 
-    // Call the main function
-    let result = maingit(vec!["test", input_file]);
+    // Call the main_with_args function
+    let result = main_with_args(vec!["test".to_string(), input_file.to_string()]);
 
     // Check if the output file was created
     assert!(result.is_ok());
@@ -29,3 +27,4 @@ fn test_cli_tool() {
     fs::remove_file(input_file).expect("Failed to clean up temporary input file.");
     fs::remove_file("output.txt").expect("Failed to clean up temporary output file.");
 }
+
