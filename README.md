@@ -1,4 +1,5 @@
 [![Python CI/CD Pipeline](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/pythonCI.yml/badge.svg)](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/pythonCI.yml)
+[![Rust CI/CD Pipeline](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/rustCI.yml/badge.svg)](https://github.com/midspooj/pb226-miniproject-8/actions/workflows/rustCI.yml)
 
 pooj update your readme pls 
 
