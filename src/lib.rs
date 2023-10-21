@@ -1,7 +1,7 @@
+use csv::ReaderBuilder;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
-use csv::ReaderBuilder;
 
 pub fn main_with_args(args: Vec<String>) -> Result<(), Box<dyn Error>> {
     let input_file = &args[1];
@@ -34,4 +34,3 @@ pub fn main_with_args(args: Vec<String>) -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-
