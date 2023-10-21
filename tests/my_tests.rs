@@ -1,6 +1,9 @@
 use std::fs;
 
 #[test]
+
+use src/main.rs::main;
+
 fn test_cli_tool() {
     // Create a temporary input file
     let input_file = "test_input.csv";
@@ -11,7 +14,7 @@ fn test_cli_tool() {
     fs::write(input_file, input_content).expect("Failed to create input file for testing.");
 
     // Call the main function
-    let result = super::main_with_args(vec!["test", input_file.to_string()]);
+    let result = maingit(vec!["test", input_file]);
 
     // Check if the output file was created
     assert!(result.is_ok());
