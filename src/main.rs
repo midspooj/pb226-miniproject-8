@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use csv::ReaderBuilder;
 
-fn main_with_args(args: Vec<String>) -> Result<(), Box<dyn Error>> {
+pub fn main_with_args(_args: Vec<String>) -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 {
@@ -46,7 +46,7 @@ fn main_with_args(args: Vec<String>) -> Result<(), Box<dyn Error>> {
 }
 
 
-fn main() -> Result<(), Box<dyn Error>> {
+pub fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
     main_with_args(args)
 }
