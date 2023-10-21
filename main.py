@@ -23,7 +23,9 @@ def process_csv(input_file, output_file):
         output.write(f'Average: {average:.2f}')
 
 def main():
-    parser = argparse.ArgumentParser(description="Process CSV file and calculate average.")
+    parser = argparse.ArgumentParser(
+        description="Process CSV file and calculate average."
+        )
     parser.add_argument("input_file", type=str, help="Input CSV file path")
     parser.add_argument("output_file", type=str, help="Output text file path")
 
